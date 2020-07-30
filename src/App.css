@@ -9,12 +9,13 @@
     color: #61dafb;
 }
 
-#header-container, #app-container {
-    max-width: 85%;
-}
-
 #navbar {
     color: #0B2027
+}
+
+#sidebar {
+    background-color: #40798C;
+    height: 100vh;
 }
 
 
@@ -29,6 +30,18 @@ button:hover {
 
 a:link, a:active, a:hover, a:visited {
     color: #52a89c
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.nav-selected {
+    background-color: #70A9A1;
+}
+
+.nav-item {
+    width:100%;
 }
 
 

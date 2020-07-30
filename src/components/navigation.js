@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 
-function Menu() {
+function Navigation() {
     return (
         <div id="header-container" className="container-fluid">
             <Navbar id="navbar" sticky="top" variant="dark">
@@ -19,4 +19,4 @@ function Menu() {
     );
 }
 
-export default Menu;
+export default Navigation;

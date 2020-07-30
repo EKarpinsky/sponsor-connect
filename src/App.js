@@ -4,7 +4,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./components/navigation";
@@ -21,11 +21,10 @@ function App() {
                 </div>
                 <div className={"row"}>
                     <div id={"sidebar"} className={"col-1 pr-0"}>
-                        <Nav className="flex-column">
-                                <Nav.Link className={window.location.pathname==="/dashboard"?"nav-item nav-selected py-1":"nav-item py-1"} href="/dashboard">Dashboard</Nav.Link>
-                                <Nav.Link className={window.location.pathname==="/browse"?"nav-item nav-selected py-1":"nav-item py-1"} href="/browse">Browse</Nav.Link>
-                                <Nav.Link className={window.location.pathname==="/profile"?"nav-item nav-selected py-1":"nav-item py-1"} href="/profile">Profile</Nav.Link>
-
+                        <Nav defaultActiveKey="/dashboard" className="flex-column">
+                            <Nav.Link className={window.location.pathname==="/dashboard"?"nav-selected py-3":"py-3"} href="/dashboard">Dashboard</Nav.Link>
+                            <Nav.Link className={window.location.pathname==="/browse"?"nav-selected py-3":"py-3"} href="/browse">Browse</Nav.Link>
+                            <Nav.Link className={window.location.pathname==="/profile"?"nav-selected py-3":"py-3"} href="/profile">Profile</Nav.Link>
                         </Nav>
                     </div>
                     <div className={"col-11"}>

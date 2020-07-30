@@ -8,9 +8,9 @@ function Navigation() {
 
                 <Navbar.Brand href="#home">SponsorConnect</Navbar.Brand>
                 <Nav className="ml-auto">
-                    <Nav.Link href="#home">Dashboard</Nav.Link>
-                    <Nav.Link href="#features">Browse</Nav.Link>
-                    <Nav.Link href="#pricing">Profile</Nav.Link>
+                    <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+                    <Nav.Link href="/browse">Browse</Nav.Link>
+                    <Nav.Link href="/profile">Profile</Nav.Link>
                     <Nav.Link href="#logout">Log Out</Nav.Link>
                 </Nav>
 

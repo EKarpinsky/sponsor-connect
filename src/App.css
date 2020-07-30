@@ -1,6 +1,6 @@
 .header {
     background-color: #0B2027;
-    min-height: 5vh;
+    max-height: 5vh;
     display: flex;
     color: white;
 }
@@ -9,7 +9,7 @@
     color: #61dafb;
 }
 
-#header-container {
+#header-container, #app-container {
     max-width: 85%;
 }
 
@@ -17,11 +17,20 @@
     color: #0B2027
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+    background-color: #52a89c !important;
+    border-color: #52a89c !important;
 }
+
+button:hover {
+    background-color: #44b8a7 !important;
+}
+
+a:link, a:active, a:hover, a:visited {
+    color: #52a89c
+}
+
+
+
+

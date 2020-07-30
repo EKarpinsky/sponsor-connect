@@ -18,18 +18,19 @@ function App() {
                 <div className="header">
                     <Navigation/>
                 </div>
-
-                <Switch>
-                    <Route path="/dashboard">
-                        <Dashboard />
-                    </Route>
-                    <Route path="/browse">
-                        <Browse />
-                    </Route>
-                    <Route path="/profile">
-                        <Profile />
-                    </Route>
-                </Switch>
+                <div id={"app-container"} className={"container-fluid"}>
+                    <Switch>
+                        <Route path="/dashboard">
+                            <Dashboard />
+                        </Route>
+                        <Route path="/browse">
+                            <Browse />
+                        </Route>
+                        <Route path="/profile">
+                            <Profile />
+                        </Route>
+                    </Switch>
+                </div>
             </div>
         </Router>
     );

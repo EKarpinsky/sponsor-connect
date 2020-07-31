@@ -1,57 +1,60 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 function Browse() {
 
-    let users = [
-        {
-            id: 0,
-            username: 'karpizzle',
-            fullname: 'Eli Karpinsky',
-            mediums: ['Video', 'Podcast'],
-            socials: [
-                {
-                    url: 'https://www.youtube.com/channel/UCzVSOJdZrXkHpwNsKAZoxMw',
-                    name: 'YouTube',
-                    followers: 134053
-                },
-                {
-                    url: 'https://www.facebook.com/Karpizzle/',
-                    name: 'Facebook',
-                    followers: 1340
-                }
-            ]
+    const [users, setUsers] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-        },
-        {
-            id: 1,
-            username: 'mitchwebsite',
-            fullname: 'Eli Karpinsky',
-            mediums: ['Video'],
-            socials: [
-                {
-                    url: 'https://www.youtube.com/channel/UCzVSOJdZrXkHpwNsKAZoxMw',
-                    name: 'YouTube',
-                    followers: 134
+    useEffect(() => {
+        fetch('http://localhost:1337/users')
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setUsers(result);
                 },
-                {
-                    url: 'https://www.facebook.com/MitchWebsite/',
-                    name: 'Facebook',
-                    followers: 13
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
                 }
-            ]
-        }
-    ];
+            )
+    }, []);
 
     let userTable = users.map(user => {
+        console.log(user);
         return (
             <tr>
                 <th scope={'row'}>{user.id}</th>
                 <td>{user.username}</td>
-                <td>{user.mediums.join(', ')}</td>
                 <td>
-                    <ul>{user.socials.map(social => {
+                    <ul>{user.mediums.map(medium => {
                             return (
-                                <li><a href={social.url}>{social.name}</a> ({social.followers})</li>
+                                Object.keys(medium).map((keyName, i) => {
+                                        if (medium[keyName] === true) {
+                                            return (
+                                                <li key={i}>{keyName}</li>
+                                            )
+                                        }
+                                    }
+                                )
+                            );
+                        }
+                    )
+                    }
+                    </ul>
+                </td>
+                <td>
+                    <ul>{user.social_links.map(social => {
+                            return (
+                                Object.keys(social).map((keyName, i) => {
+                                        if (keyName !== 'id') {
+                                            return (
+                                                <li key={i}><a href={social[keyName].url}>{keyName}</a></li>
+                                            )
+                                        }
+                                    }
+                                )
                             );
                         }
                     )
@@ -62,7 +65,7 @@ function Browse() {
                 </td>
             </tr>
         );
-    })
+    });
 
     return (
         <div className={'container-fluid'}>

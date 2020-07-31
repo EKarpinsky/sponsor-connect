@@ -22,7 +22,6 @@ function Browse() {
     }, []);
 
     let userTable = users.map(user => {
-        console.log(user);
         return (
             <tr>
                 <th scope={'row'}>{user.id}</th>
@@ -50,7 +49,7 @@ function Browse() {
                                 Object.keys(social).map((keyName, i) => {
                                         if (keyName !== 'id') {
                                             return (
-                                                <li key={i}><a href={social[keyName].url}>{keyName}</a></li>
+                                                <li key={i}><a href={social[keyName].url}>{keyName}</a> ({social[keyName].followers})</li>
                                             )
                                         }
                                     }

@@ -13,6 +13,10 @@
     color: #0B2027
 }
 
+#header-container{
+    max-width: 70%;
+}
+
 #sidebar {
     background-color: #40798C;
     height: 100vh;
@@ -42,6 +46,10 @@ a:link, a:active, a:hover, a:visited {
 
 .nav-item {
     width:100%;
+}
+
+.welcome-title, .welcome-heading {
+    text-align: center;
 }
 
 

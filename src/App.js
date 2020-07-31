@@ -3,44 +3,42 @@ import {
     BrowserRouter as Router,
     Switch,
     Route
-} from "react-router-dom";
-import { Nav } from "react-bootstrap";
+} from 'react-router-dom';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from "./components/navigation";
-import Dashboard from "./components/dashboard";
-import Browse from "./components/browse";
-import Profile from "./components/profile";
+import Sidebar from './components/Sidebar/Sidebar';
+import Header from './components/navigation';
+import Dashboard from './components/dashboard';
+import Browse from './components/browse';
+import Profile from './components/profile';
+import Welcome from './components/Welcome/Welcome';
 
 function App() {
     return (
         <Router>
-            <div className="App">
-                <div className="header">
-                    <Navigation/>
+            <div className='App'>
+                <div className='header'>
+                    {/*only show header on welcome page*/}
+                    {window.location.pathname === '/' && <Header/>}
                 </div>
-                <div className={"row"}>
-                    <div id={"sidebar"} className={"col-1 pr-0"}>
-                        <Nav defaultActiveKey="/dashboard" className="flex-column">
-                            <Nav.Link className={window.location.pathname==="/dashboard"?"nav-selected py-3":"py-3"} href="/dashboard">Dashboard</Nav.Link>
-                            <Nav.Link className={window.location.pathname==="/browse"?"nav-selected py-3":"py-3"} href="/browse">Browse</Nav.Link>
-                            <Nav.Link className={window.location.pathname==="/profile"?"nav-selected py-3":"py-3"} href="/profile">Profile</Nav.Link>
-                        </Nav>
-                    </div>
-                    <div className={"col-11"}>
-                        <div id={"app-container"} className={"container-fluid"}>
-                            <Switch>
-                                <Route path="/dashboard">
-                                    <Dashboard />
-                                </Route>
-                                <Route path="/browse">
-                                    <Browse />
-                                </Route>
-                                <Route path="/profile">
-                                    <Profile />
-                                </Route>
-                            </Switch>
-                        </div>
+                <div className={'row'}>
+                    {window.location.pathname !== '/' && <Sidebar/>}
+                    <div id={'app-container'} className={'container-fluid col-11'}>
+                        <Switch>
+                            <Route exact path='/'>
+                                <Welcome/>
+                            </Route>
+                            <Route path='/dashboard'>
+                                <Dashboard/>
+                            </Route>
+                            <Route path='/browse'>
+                                <Browse/>
+                            </Route>
+                            <Route path='/profile'>
+                                <Profile/>
+                            </Route>
+                        </Switch>
                     </div>
                 </div>
             </div>

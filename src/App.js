@@ -13,6 +13,8 @@ import Dashboard from './components/dashboard';
 import Browse from './components/browse';
 import Profile from './components/profile';
 import Welcome from './components/Welcome/Welcome';
+import Login from './components/Login/Login';
+
 
 function App() {
     return (
@@ -23,7 +25,7 @@ function App() {
                     {window.location.pathname === '/' && <Header/>}
                 </div>
                 <div className={'row'}>
-                    {window.location.pathname !== '/' && <Sidebar/>}
+                    {window.location.pathname !== '/' && window.location.pathname !== '/login' && <Sidebar/>}
                     <div id={'app-container'} className={'container-fluid col-11'}>
                         <Switch>
                             <Route exact path='/'>
@@ -37,6 +39,9 @@ function App() {
                             </Route>
                             <Route path='/profile'>
                                 <Profile/>
+                            </Route>
+                            <Route path='/login'>
+                                <Login/>
                             </Route>
                         </Switch>
                     </div>

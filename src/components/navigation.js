@@ -11,7 +11,8 @@ function Navigation() {
                     <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                     <Nav.Link href="/browse">Browse</Nav.Link>
                     <Nav.Link href="/profile">Profile</Nav.Link>
-                    <Nav.Link href="#logout">Log Out</Nav.Link>
+                    <Nav.Link href="/logout">Log Out</Nav.Link>
+                    <Nav.Link href="/login">Login</Nav.Link>
                 </Nav>
 
             </Navbar>

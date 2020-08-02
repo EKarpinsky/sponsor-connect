@@ -22,6 +22,8 @@ function Browse() {
     }, []);
 
     let userTable = users.map(user => {
+
+
         return (
             <tr>
                 <th scope={'row'}>{user.id}</th>
@@ -49,7 +51,8 @@ function Browse() {
                                 Object.keys(social).map((keyName, i) => {
                                         if (keyName !== 'id') {
                                             return (
-                                                <li key={i}><a href={social[keyName].url}>{keyName}</a> ({social[keyName].followers})</li>
+                                                <li key={i}><a
+                                                    href={social[keyName].url}>{keyName}</a> ({social[keyName].followers})</li>
                                             )
                                         }
                                     }
@@ -66,26 +69,32 @@ function Browse() {
         );
     });
 
-    return (
-        <div className={'container-fluid'}>
-            <h1 className={'page-heading mt-5'}>Browse Creators</h1>
-            <table className={'table mt-5'}>
-                <thead>
-                <tr>
-                    <th scope={'col'}>ID</th>
-                    <th scope={'col'}>Username</th>
-                    <th scope={'col'}>Medium(s)</th>
-                    <th scope={'col'}>Social Links</th>
-                    <th scope={'col'}/>
-                </tr>
-                </thead>
-                <tbody>
-                {userTable}
-                </tbody>
-            </table>
+    if (!isLoaded)
+        return (<div>Loading...</div>);
+    else if (error)
+        return (<div>Error fetching data</div>);
+    else {
+        return (
+            <div className={'container-fluid'}>
+                <h1 className={'page-heading mt-5'}>Browse Creators</h1>
+                <table className={'table mt-5'}>
+                    <thead>
+                    <tr>
+                        <th scope={'col'}>ID</th>
+                        <th scope={'col'}>Username</th>
+                        <th scope={'col'}>Medium(s)</th>
+                        <th scope={'col'}>Social Links</th>
+                        <th scope={'col'}/>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {userTable}
+                    </tbody>
+                </table>
 
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 export default Browse;

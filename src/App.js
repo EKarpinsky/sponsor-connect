@@ -2,7 +2,8 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom';
 
 import './App.css';
@@ -17,15 +18,35 @@ import Login from './components/Login/Login';
 
 
 function App() {
+
+    let login = false;
+
+    const logIn = () => {
+        login = true;
+        console.log('logged in', login);
+
+    }
+
     return (
         <Router>
             <div className='App'>
                 <div className='header'>
                     {/*only show header on welcome page*/}
-                    {window.location.pathname === '/' && <Header/>}
+                    <Switch>
+                        <Route exact path='/'>
+                            <Header/>
+                        </Route>
+                    </Switch>
                 </div>
                 <div className={'row'}>
-                    {window.location.pathname !== '/' && window.location.pathname !== '/login' && <Sidebar/>}
+                    {/*Do not show sidebar on welcome/login pages*/}
+                    <Switch>
+                        <Route exact path='/'/>
+                        <Route path='/login'/>
+                        <Route path='/'>
+                            <Sidebar/>
+                        </Route>
+                    </Switch>
                     <div id={'app-container'} className={'container-fluid col-11'}>
                         <Switch>
                             <Route exact path='/'>
@@ -41,7 +62,7 @@ function App() {
                                 <Profile/>
                             </Route>
                             <Route path='/login'>
-                                <Login/>
+                                {login ? <Redirect to='/dashboard'/> : <Login onSubmit={logIn}/>}
                             </Route>
                         </Switch>
                     </div>

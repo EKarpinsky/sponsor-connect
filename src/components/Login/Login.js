@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './Login.css';
+import {Link} from 'react-router-dom';
 
-function Login() {
+function Login(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleSubmit = () => {
-        console.log('beginning');
         fetch('http://localhost:1337/auth/local', {
             method: 'post',
             headers: {
@@ -18,8 +18,10 @@ function Login() {
             })
         })
             .then((res) => res.json())
-            .then(res => localStorage.setItem('token', res.jwt)).finally(console.log(localStorage.getItem('token')));
-
+            .then(res => {
+                props.onSubmit();
+                localStorage.setItem('token', res.jwt);
+            });
     };
 
     return (
@@ -58,7 +60,7 @@ function Login() {
                                     </button>
                                 </div>
                                 <div id='register-link' className='text-right'>
-                                    <a href='#' className='text-info'>Register here</a>
+                                    <Link to='/login' className='text-info'>Register here</Link>
                                 </div>
                                 {/*</form>*/}
                             </div>

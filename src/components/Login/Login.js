@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import './Login.css';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 function Login(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
+
     const handleSubmit = () => {
         fetch('http://localhost:1337/auth/local', {
             method: 'post',
@@ -21,6 +23,7 @@ function Login(props) {
             .then(res => {
                 props.onSubmit();
                 localStorage.setItem('token', res.jwt);
+                history.push('/');
             });
     };
 

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/sponsorconnect.iml" filepath="$PROJECT_DIR$/.idea/sponsorconnect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sponsorconnect-backend/.idea/sponsorconnect-backend.iml" filepath="$PROJECT_DIR$/../sponsorconnect-backend/.idea/sponsorconnect-backend.iml" />
     </modules>
   </component>
 </project>

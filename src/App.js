@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -19,12 +19,18 @@ import Login from './components/Login/Login';
 
 function App() {
 
-    let login = false;
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    // check local storage for jwt for logged in
+    useEffect(() => {
+        if (localStorage.getItem('token'))
+            setLoggedIn(true);
+    }, [])
 
     const logIn = () => {
-        login = true;
-        console.log('logged in', login);
-
+        setLoggedIn(true);
+        if (loggedIn)
+            console.log('logged in');
     }
 
     return (
@@ -62,7 +68,7 @@ function App() {
                                 <Profile/>
                             </Route>
                             <Route path='/login'>
-                                {login ? <Redirect to='/dashboard'/> : <Login onSubmit={logIn}/>}
+                                {loggedIn ? <Redirect to='/dashboard'/> : <Login onSubmit={logIn}/>}
                             </Route>
                         </Switch>
                     </div>

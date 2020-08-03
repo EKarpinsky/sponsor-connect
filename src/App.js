@@ -21,10 +21,11 @@ import {AuthContext} from './libs/contextLib';
 function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
+    let token = localStorage.getItem('token');
 
     // check local storage for jwt for logged in
     useEffect(() => {
-        if (localStorage.getItem('token'))
+        if (token)
             setLoggedIn(true);
         else
             setLoggedIn(false);
@@ -41,7 +42,7 @@ function App() {
     }
 
     return (
-        <AuthContext.Provider value={{isLoggedIn: loggedIn, login: login, logout: logout}}>
+        <AuthContext.Provider value={{isLoggedIn: loggedIn, token: token, login: login, logout: logout}}>
             <Router>
                 <div className='App'>
                     <div className='header'>

@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import './Login.css';
 import {Link, useHistory} from 'react-router-dom';
+import {AuthContext} from '../../libs/contextLib';
 
-function Login(props) {
+function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
+    const authContext = useContext(AuthContext);
 
     const handleSubmit = () => {
         fetch('http://localhost:1337/auth/local', {
@@ -21,9 +23,9 @@ function Login(props) {
         })
             .then((res) => res.json())
             .then(res => {
-                props.onSubmit();
+                authContext.login();
                 localStorage.setItem('token', res.jwt);
-                history.push('/');
+                history.push('/dashboard');
             });
     };
 

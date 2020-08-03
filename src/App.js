@@ -15,6 +15,7 @@ import Browse from './components/browse';
 import Profile from './components/profile';
 import Welcome from './components/Welcome/Welcome';
 import Login from './components/Login/Login';
+import {AuthContext} from './libs/contextLib';
 
 
 function App() {
@@ -25,56 +26,64 @@ function App() {
     useEffect(() => {
         if (localStorage.getItem('token'))
             setLoggedIn(true);
+        else
+            setLoggedIn(false);
     }, [])
 
-    const logIn = () => {
+    const login = () => {
         setLoggedIn(true);
         if (loggedIn)
             console.log('logged in');
     }
 
+    const logout = () => {
+        setLoggedIn(false);
+    }
+
     return (
-        <Router>
-            <div className='App'>
-                <div className='header'>
-                    {/*only show header on welcome page*/}
-                    <Switch>
-                        <Route exact path='/'>
-                            <Header/>
-                        </Route>
-                    </Switch>
-                </div>
-                <div className={'row'}>
-                    {/*Do not show sidebar on welcome/login pages*/}
-                    <Switch>
-                        <Route exact path='/'/>
-                        <Route path='/login'/>
-                        <Route path='/'>
-                            <Sidebar/>
-                        </Route>
-                    </Switch>
-                    <div id={'app-container'} className={'container-fluid col-11'}>
+        <AuthContext.Provider value={{isLoggedIn: loggedIn, login: login, logout: logout}}>
+            <Router>
+                <div className='App'>
+                    <div className='header'>
+                        {/*only show header on welcome page*/}
                         <Switch>
                             <Route exact path='/'>
-                                <Welcome/>
-                            </Route>
-                            <Route path='/dashboard'>
-                                <Dashboard/>
-                            </Route>
-                            <Route path='/browse'>
-                                <Browse/>
-                            </Route>
-                            <Route path='/profile'>
-                                <Profile/>
-                            </Route>
-                            <Route path='/login'>
-                                {loggedIn ? <Redirect to='/dashboard'/> : <Login onSubmit={logIn}/>}
+                                <Header/>
                             </Route>
                         </Switch>
                     </div>
+                    <div className={'row'}>
+                        {/*Do not show sidebar on welcome/login pages*/}
+                        <Switch>
+                            <Route exact path='/'/>
+                            <Route path='/login'/>
+                            <Route path='/'>
+                                <Sidebar/>
+                            </Route>
+                        </Switch>
+                        <div id={'app-container'} className={'container-fluid col-11'}>
+                            <Switch>
+                                <Route exact path='/'>
+                                    <Welcome/>
+                                </Route>
+                                <Route path='/dashboard'>
+                                    <Dashboard/>
+                                </Route>
+                                <Route path='/browse'>
+                                    <Browse/>
+                                </Route>
+                                <Route path='/profile'>
+                                    <Profile/>
+                                </Route>
+                                <Route path='/login'>
+                                    {loggedIn ? <Redirect to='/dashboard'/> : <Login/>}
+                                </Route>
+                            </Switch>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </Router>
+            </Router>
+        </AuthContext.Provider>
     );
 }
 

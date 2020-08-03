@@ -1,43 +1,59 @@
-import React, {useState, useContext} from 'react';
-import './Login.css';
-import {Link, useHistory} from 'react-router-dom';
+import React, {useContext, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import {AuthContext} from '../../libs/contextLib';
 
-function Login() {
 
+const Register = () => {
+    const authContext = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [error, setError] = useState('');
     const history = useHistory();
-    const authContext = useContext(AuthContext);
 
     const handleSubmit = () => {
-        fetch('http://localhost:1337/auth/local', {
+        fetch('http://localhost:1337/auth/local/register', {
             method: 'post',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify({
-                identifier: email,
+                username: username,
+                email: email,
                 password: password
             })
         })
             .then((res) => res.json())
             .then(res => {
-                authContext.login();
-                localStorage.setItem('token', res.jwt);
-                history.push('/dashboard');
+                if (res.statusCode) {
+                    // stupid Strapi API format
+                    if (res.message)
+                        setError(res.message[0].messages[0].message)
+                } else {
+                    authContext.login();
+                    localStorage.setItem('token', res.jwt);
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                    history.push('/dashboard');
+                }
             });
     };
 
     return (
-        <div data-testid='Login'>
+        <div data-testid='Register' id='login-container'>
             <div id='login'>
                 <div className='container'>
                     <div id='login-row' className='row justify-content-center align-items-center'>
                         <div id='login-column' className='col-md-6'>
                             <div id='login-box' className='col-md-12'>
                                 {/*<form id='login-form' className='form'>*/}
-                                <h3 className='text-center text-info'>Login</h3>
+                                <h3 className='text-center text-info'>Register</h3>
+                                <div className='form-group'>
+                                    <label htmlFor='email' className='text-info'>Username:</label>
+                                    <br/>
+                                    <input type='text' name='username' id='username' className='form-control'
+                                           value={username}
+                                           onChange={e => setUsername(e.target.value)}/>
+                                </div>
                                 <div className='form-group'>
                                     <label htmlFor='email' className='text-info'>Email:</label>
                                     <br/>
@@ -59,14 +75,13 @@ function Login() {
                                         </span>
                                     </label>
                                     <br/>
+                                    {error !== '' && <div className={'alert alert-danger'}>{error}</div>}
                                     <button onClick={handleSubmit} type='submit' name='submit'
                                             className='btn btn-info btn-md'>
                                         Submit
                                     </button>
                                 </div>
-                                <div id='register-link' className='text-right'>
-                                    <Link to='/register' className='text-info'>Register here</Link>
-                                </div>
+
                                 {/*</form>*/}
                             </div>
                         </div>
@@ -77,4 +92,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;

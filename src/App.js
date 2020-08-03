@@ -16,6 +16,7 @@ import Profile from './components/profile';
 import Welcome from './components/Welcome/Welcome';
 import Login from './components/Login/Login';
 import {AuthContext} from './libs/contextLib';
+import Register from './components/Register/Register';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
 
     const logout = () => {
         setLoggedIn(false);
+        localStorage.removeItem('token');
     }
 
     return (
@@ -78,6 +80,9 @@ function App() {
                                 </Route>
                                 <Route path='/login'>
                                     {loggedIn ? <Redirect to='/dashboard'/> : <Login/>}
+                                </Route>
+                                <Route path='/register'>
+                                    {loggedIn ? <Redirect to='/dashboard'/> : <Register/>}
                                 </Route>
                             </Switch>
                         </div>

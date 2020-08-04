@@ -17,11 +17,7 @@
     max-width: 70%;
 }
 
-#sidebar {
-    background-color: #40798C;
-    height: 100vh;
-    min-width: fit-content;
-}
+
 
 #login-box {
     height:fit-content!important;

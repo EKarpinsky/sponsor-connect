@@ -69,32 +69,35 @@ function Browse() {
         );
     });
 
-    if (!isLoaded)
-        return (<div>Loading...</div>);
-    else if (error)
-        return (<div>Error fetching data</div>);
-    else {
-        return (
-            <div className={'container-fluid'}>
-                <h1 className={'page-heading mt-5'}>Browse Creators</h1>
-                <table className={'table mt-5'}>
-                    <thead>
-                    <tr>
-                        <th scope={'col'}>ID</th>
-                        <th scope={'col'}>Username</th>
-                        <th scope={'col'}>Medium(s)</th>
-                        <th scope={'col'}>Social Links</th>
-                        <th scope={'col'}/>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {userTable}
-                    </tbody>
-                </table>
+    return (
+        <div className={'container-fluid'}>
+            <h1 className={'page-heading mt-5'}>Browse Creators</h1>
 
+            <table className={'table mt-5'}>
+
+                <thead>
+                <tr>
+                    <th scope={'col'}>ID</th>
+                    <th scope={'col'}>Username</th>
+                    <th scope={'col'}>Medium(s)</th>
+                    <th scope={'col'}>Social Links</th>
+                    <th scope={'col'}/>
+                </tr>
+                </thead>
+
+            </table>
+            <div className={'mt-3'}>
+                {!isLoaded && <div>Loading...</div>}
+                {error && <div>Error fetching data</div>}
+                {!error && isLoaded &&
+                <tbody>
+                {userTable}
+                </tbody>
+                }
             </div>
-        );
-    }
+        </div>
+    );
+
 }
 
 export default Browse;

@@ -46,7 +46,7 @@ function App() {
     return (
         <AuthContext.Provider value={{isLoggedIn: loggedIn, token: token, login: login, logout: logout}}>
             <Router>
-                <div className='App'>
+                <div className='App overflow-hidden'>
                     <div className='header'>
                         {/*only show header on welcome page*/}
                         <Switch>
@@ -55,7 +55,7 @@ function App() {
                             </Route>
                         </Switch>
                     </div>
-                    <div className={'row'}>
+                    <div className={'row flex-nowrap'}>
                         {/*Do not show sidebar on welcome/login pages*/}
                         <Switch>
                             <Route exact path='/'/>

@@ -25,6 +25,7 @@ function Login() {
             .then(res => {
                 authContext.login();
                 localStorage.setItem('token', res.jwt);
+                localStorage.setItem('user', JSON.stringify(res.user));
                 history.push('/dashboard');
             });
     };

@@ -44,9 +44,7 @@ a:link, a:active, a:hover, a:visited {
     color: white !important;
 }
 
-.nav-selected {
-    background-color: #70A9A1;
-}
+
 
 .nav-item {
     width:100%;

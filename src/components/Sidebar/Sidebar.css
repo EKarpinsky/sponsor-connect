@@ -1,0 +1,7 @@
+.nav-selected {
+    background-color: #70A9A1;
+}
+
+.nav-item:hover{
+    background-color: #5f857f;
+}

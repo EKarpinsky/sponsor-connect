@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import Card from './Card/Card';
 
 function Browse() {
 
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [cardView, setCardView] = useState(false);
+    const [cardView, setCardView] = useState(true);
 
     useEffect(() => {
         fetch('http://localhost:1337/users')
@@ -21,6 +22,9 @@ function Browse() {
                 }
             )
     }, []);
+
+
+
 
     let userTable = users.map(user => {
 
@@ -87,6 +91,7 @@ function Browse() {
                             : 'btn btn-light radio-inline px-3'}>
                     <input type='radio' name='optradio' onChange={() => setCardView(false)}/>List view</label>
             </div>
+            {cardView && <Card users={users}/>}
             {!cardView && <table className={'table mt-5'}>
 
                 <thead>
@@ -98,17 +103,23 @@ function Browse() {
                     <th scope={'col'}/>
                 </tr>
                 </thead>
+                <tbody className={'mt-3'}>
 
-            </table>}
-            <div className={'mt-3'}>
-                {!isLoaded && <div>Loading...</div>}
-                {error && <div>Error fetching data</div>}
+                {!isLoaded && <tr>
+                    <td>Loading...</td>
+                </tr>}
+                {error && <tr>
+                    <td>Error fetching data</td>
+                </tr>}
                 {!error && isLoaded &&
-                <tbody>
-                {userTable}
-                </tbody>
+
+                userTable
+
                 }
-            </div>
+
+                </tbody>
+            </table>}
+
         </div>
     );
 

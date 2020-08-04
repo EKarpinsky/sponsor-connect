@@ -72,11 +72,16 @@ const Register = () => {
                                 <h3 className='text-center text-info'>I am a:</h3>
                                 <div className='btn-group-toggle d-flex justify-content-center' data-toggle='buttons'>
                                     <label
-                                        className={userRole === 'creator' ? 'btn btn-secondary radio-inline mx-2 px-5 active' : 'btn btn-secondary radio-inline mx-2 px-5'}>
-                                        <input type='radio' name='optradio' onChange={() => setUserRole('creator')}
-                                        />Creator</label>
+                                        className={
+                                            userRole === 'creator'
+                                                ? 'btn btn-secondary radio-inline mx-2 px-5 active'
+                                                : 'btn btn-secondary radio-inline mx-2 px-5'}>
+                                        <input type='radio' name='optradio' onChange={() => setUserRole('creator')}/>Creator</label>
                                     <label
-                                        className={userRole === 'sponsor' ? 'btn btn-secondary radio-inline mx-2 px-5 active' : 'btn btn-secondary radio-inline mx-2 px-5'}>
+                                        className={
+                                            userRole === 'sponsor'
+                                                ? 'btn btn-secondary radio-inline mx-2 px-5 active'
+                                                : 'btn btn-secondary radio-inline mx-2 px-5'}>
                                         <input type='radio' name='optradio' onChange={() => setUserRole('sponsor')}/>Sponsor</label>
                                 </div>
                                 <div className='form-group'>

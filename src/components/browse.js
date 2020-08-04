@@ -5,6 +5,7 @@ function Browse() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [cardView, setCardView] = useState(false);
 
     useEffect(() => {
         fetch('http://localhost:1337/users')
@@ -72,8 +73,21 @@ function Browse() {
     return (
         <div className={'container-fluid'}>
             <h1 className={'page-heading mt-5'}>Browse Creators</h1>
-
-            <table className={'table mt-5'}>
+            <div className='btn-group-toggle d-flex justify-content-start' data-toggle='buttons'>
+                <label
+                    className={
+                        cardView === true
+                            ? 'btn btn-light radio-inline mr-2 px-3 active'
+                            : 'btn btn-light radio-inline mr-2 px-3'}>
+                    <input type='radio' name='optradio' onChange={() => setCardView(true)}/>Card view</label>
+                <label
+                    className={
+                        cardView === false
+                            ? 'btn btn-light radio-inline px-3 active'
+                            : 'btn btn-light radio-inline px-3'}>
+                    <input type='radio' name='optradio' onChange={() => setCardView(false)}/>List view</label>
+            </div>
+            {!cardView && <table className={'table mt-5'}>
 
                 <thead>
                 <tr>
@@ -85,7 +99,7 @@ function Browse() {
                 </tr>
                 </thead>
 
-            </table>
+            </table>}
             <div className={'mt-3'}>
                 {!isLoaded && <div>Loading...</div>}
                 {error && <div>Error fetching data</div>}

@@ -60,6 +60,7 @@ function App() {
                         <Switch>
                             <Route exact path='/'/>
                             <Route path='/login'/>
+                            <Route path='/register'/>
                             <Route path='/'>
                                 <Sidebar/>
                             </Route>

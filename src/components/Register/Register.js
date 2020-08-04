@@ -9,6 +9,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
+    const [userRole, setUserRole] = useState('creator');
     const history = useHistory();
 
     const handleSubmit = () => {
@@ -44,7 +45,7 @@ const Register = () => {
                 <div className='container'>
                     <div id='login-row' className='row justify-content-center align-items-center'>
                         <div id='login-column' className='col-md-6'>
-                            <div id='login-box' className='col-md-12'>
+                            <div id='login-box' className='col-md-12 flex'>
                                 {/*<form id='login-form' className='form'>*/}
                                 <h3 className='text-center text-info'>Register</h3>
                                 <div className='form-group'>
@@ -68,16 +69,22 @@ const Register = () => {
                                            value={password}
                                            onChange={e => setPassword(e.target.value)}/>
                                 </div>
+                                <h3 className='text-center text-info'>I am a:</h3>
+                                <div className='btn-group-toggle d-flex justify-content-center' data-toggle='buttons'>
+                                    <label
+                                        className={userRole === 'creator' ? 'btn btn-secondary radio-inline mx-2 px-5 active' : 'btn btn-secondary radio-inline mx-2 px-5'}>
+                                        <input type='radio' name='optradio' onChange={() => setUserRole('creator')}
+                                        />Creator</label>
+                                    <label
+                                        className={userRole === 'sponsor' ? 'btn btn-secondary radio-inline mx-2 px-5 active' : 'btn btn-secondary radio-inline mx-2 px-5'}>
+                                        <input type='radio' name='optradio' onChange={() => setUserRole('sponsor')}/>Sponsor</label>
+                                </div>
                                 <div className='form-group'>
-                                    <label htmlFor='remember-me' className='text-info'><span>Remember me</span>
-                                        <span>
-                                            <input id='remember-me' name='remember-me' type='checkbox'/>
-                                        </span>
-                                    </label>
+
                                     <br/>
                                     {error !== '' && <div className={'alert alert-danger'}>{error}</div>}
                                     <button onClick={handleSubmit} type='submit' name='submit'
-                                            className='btn btn-info btn-md'>
+                                            className='btn btn-info btn-md mt-3'>
                                         Submit
                                     </button>
                                 </div>

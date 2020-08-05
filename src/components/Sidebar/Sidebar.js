@@ -18,7 +18,7 @@ function Sidebar() {
     return (
         <div data-testid='Sidebar' id={'sidebar'} className={'col-1 pr-0'}>
             <Nav defaultActiveKey='/dashboard' id={'sidebar-nav'} className='flex-column'>
-                {authContext.isLoggedIn && userLoaded &&
+                {authContext.isLoggedIn && userLoaded && userData.profile_image !== null &&
                 <Nav.Link
                     className={window.location.pathname === '/profile' ? 'd-flex px-2 align-items-center nav-selected' : 'd-flex px-2 align-items-center nav-item'}
                     href='/profile'><img className='sidebar-profile-thumbnail mx-2'

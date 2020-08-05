@@ -21,7 +21,10 @@ const Register = () => {
             body: JSON.stringify({
                 username: username,
                 email: email,
-                password: password
+                password: password,
+                role: {
+                    id: 3
+                }
             })
         })
             .then((res) => res.json())

@@ -1,36 +1,36 @@
 import React from 'react';
 import './Card.css'
-
+import noUserImage from './1_a-HXhG_PoTygNXqwp9KHMA.jpeg';
 
 const Card = props => {
 
-
     let userCards = props.users.map(user => {
         return (
+
             <div className='card mt-4 mr-3'>
                 <div className='card-body'>
-                    {user.profile_image &&
-                    <img className='card-img-top' src={'http://localhost:1337' + user.profile_image.formats.medium.url}
-                         alt='User profile picture'/>}
+
+                    <img className='card-img-top' src={user.profile_image !== null
+                        ? 'http://localhost:1337' + user.profile_image.formats.medium.url
+                        : noUserImage}
+                         alt='User profile'/>
                     <h5 className='card-title text-center mt-2'><a href={'#'}>{user.username}</a></h5>
                     <h6 className='card-subtitle mb-2 text-muted'>Mediums</h6>
-                    <p className='card-text'>
-                        <ul className={'pl-3'}>{user.mediums.map(medium => {
-                                return (
-                                    Object.keys(medium).map((keyName, i) => {
-                                            if (medium[keyName] === true) {
-                                                return (
-                                                    <li key={i}>{keyName}</li>
-                                                )
-                                            }
+                    <ul className={'pl-3 card-text'}>{user.mediums.map(medium => {
+                            return (
+                                Object.keys(medium).map((keyName, i) => {
+                                        if (medium[keyName] === true) {
+                                            return (
+                                                <li key={i}>{keyName}</li>
+                                            )
                                         }
-                                    )
-                                );
-                            }
-                        )
+                                    }
+                                )
+                            );
                         }
-                        </ul>
-                    </p>
+                    )
+                    }
+                    </ul>
                     {user.social_links.map(social => {
                             return (
                                 Object.keys(social).map((keyName, i) => {
